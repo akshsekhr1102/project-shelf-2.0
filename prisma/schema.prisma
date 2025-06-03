@@ -10,8 +10,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Define your models here 
-
 model User {
   id         String      @id // This will store Clerk's user ID
   email      String      @unique
@@ -38,13 +36,13 @@ model Portfolio {
 }
 
 model Analytics {
-  id         String   @id @default(cuid())
-  userId     String
-  user       User     @relation(fields: [userId], references: [id])
-  type       String   // "portfolio_view" | "project_view"
-  projectId  String?  // Optional, for project-specific analytics
-  metadata   Json?    // Additional data like referrer, device, etc.
-  createdAt  DateTime @default(now())
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  type      String // "portfolio_view" | "project_view"
+  projectId String? // Optional, for project-specific analytics
+  metadata  Json? // Additional data like referrer, device, etc.
+  createdAt DateTime @default(now())
 
   @@index([userId])
   @@index([type])
